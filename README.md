@@ -1,0 +1,2 @@
+# html2canvas
+采用html2canvas搭配json数据动态生成300dpi图片用于打印需求
