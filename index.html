@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/html2canvas.js"></script>
+</head>
+<body>
+<div class="container">
+    <ul class="btnbox"><button class="btn btn-build">数据生成</button><button class="btn btn-save">图片保存</button><span id="per"></span></ul>
+    <ul class="list_data clearfix"><li class="box_data"></li></ul>
+    <!--<li class="box_data">
+        <div class="uid">NO.00025</div>
+        <div class="occ">软件测试工程师</div>
+        <div class="uname">陈振东</div>
+        <div class="ename">Zhendong Chen</div>
+    </li>-->
+    <ul class="list_img clearfix"></ul>
+</div>
+<script>
+    $(function(){
+        var boxData = $(".list_data");
+        var boxImg = $(".list_img");
+        $(".btn-build").on('click',function(){
+            $.ajax({
+                url:'data/data.json',
+                method:'GET',
+                success:function(res){
+                    var team = res.team;
+                    boxData.html('');
+                    team.forEach(function(item){
+                        var teamName = item.name, teamBg = item.bg, member = item.member;
+                        member.forEach(function(me){
+                            boxData.append('<li class="box_data" style="background-image:url(' + teamBg + ')"><div class="uid">NO.' + me.uid + '</div><div class="occ">' + me.occ + '</div><div class="uname">' + me.uname + '</div><div class="ename">' + me.ename + '</div></li>');
+                        })
+                        //
+                    });
+                }
+            });
+        });
+        $(".btn-save").on('click',function(){
+            boxImg.html('');
+            var len = $(".list_data li").length;
+            if(len > 0){
+                save(len,0);
+            }
+        });
+        function save(len,index){
+            if(index < len){
+                var content = $(".list_data li").eq(index);
+                var _index = index + 1;
+                html2canvas(content,{
+                    onrendered:function(canvas){
+                        var imgData = canvas.toDataURL('image/png', 1.0);
+                        var imgName = "head_" + _index;
+                        $.ajax({
+                            url:'save.php',
+                            method:'POST',
+                            data:
+                            {
+                                imgData:imgData,
+                                imgName:imgName
+                            },
+                            success:function(data){
+                                $("#per").html("共计 " + len + " 张，当前第 " + _index + " 张：" + imgName + ".png");
+                                //console.log(imgData);
+                                index += 1;
+                                save(len,index);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

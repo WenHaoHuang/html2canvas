@@ -1,0 +1,47 @@
+{
+  "team":[
+    {
+      "name":"技术研发部",
+      "bg":"images/bg.jpg",
+      "member":[
+        {
+          "uid":"00025",
+          "uname":"黄文浩",
+          "ename":"Wenhao Huang",
+          "occ":"前端开发工程师"
+        },{
+          "uid":"00175",
+          "uname":"陈振东",
+          "ename":"Zhendong Chen",
+          "occ":"软件测试工程师"
+        },{
+          "uid":"00013",
+          "uname":"郑 雯",
+          "ename":"Wen Zhen",
+          "occ":"前端开发工程师"
+        },{
+          "uid":"00075",
+          "uname":"黄苏云滨",
+          "ename":"Yunbin Huangsu",
+          "occ":"UI设计工程师"
+        }
+      ]
+    },{
+      "name":"技术研发部",
+      "bg":"images/bg.jpg",
+      "member":[
+        {
+          "uid":"00025",
+          "uname":"黄文浩",
+          "ename":"Wenhao Huang",
+          "occ":"前端开发工程师"
+        },{
+          "uid":"00175",
+          "uname":"陈振东",
+          "ename":"Zhendong Chen",
+          "occ":"软件测试工程师"
+        }
+      ]
+    }
+  ]
+}
